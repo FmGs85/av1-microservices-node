@@ -1,0 +1,16 @@
+{
+  "name": "av1-microservices-node",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "product": "npm run dev --workspace=apps/product-service",
+    "order": "npm run dev --workspace=apps/order-service",
+    "gateway": "npm run dev --workspace=apps/api-gateway"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsx": "^4.7.0",
+    "@types/node": "^20.11.0"
+  }
+}
