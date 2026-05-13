@@ -8,6 +8,10 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
-    "fastify": "^5.8.5"
+    "fastify": "^4.26.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
   }
 }

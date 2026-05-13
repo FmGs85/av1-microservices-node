@@ -10,5 +10,9 @@
   "dependencies": {
     "fastify": "^4.26.0",
     "@fastify/http-proxy": "^9.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
   }
 }
