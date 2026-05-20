@@ -9,14 +9,22 @@ Projeto da AV Prática da disciplina de Microserviços do curso de Análise e De
 
 ## Arquitetura
 
-Cliente
-│
-▼ :3000
-[ API Gateway ]
-├── /products/* ──► :3001 [ Product Service ]
-└── /orders/*   ──► :3002 [ Order Service ]
-│
-└──► :3001 [ Product Service ]
+```text
+        Cliente
+           │
+           ▼ :3000
+    ┌──────────────┐
+    │ API Gateway  │
+    └──────┬───────┘
+           │
+   ┌───────┴────────┐
+   ▼                ▼
+:3001            :3002
+Product          Order
+Service          Service
+                    │
+                    └──► :3001 Product Service
+```
 
 O cliente faz todas as requisições para o **API Gateway** (porta 3000). O gateway roteia para o serviço correto. O **Order Service** consulta o **Product Service** internamente ao criar pedidos para enriquecer o pedido com nome do produto e total calculado.
 
@@ -31,6 +39,7 @@ O cliente faz todas as requisições para o **API Gateway** (porta 3000). O gate
 
 ## Estrutura do projeto
 
+```text
 av1-microservices-node/
 ├── apps/
 │   ├── product-service/      # Serviço de catálogo de produtos (porta 3001)
@@ -52,6 +61,7 @@ av1-microservices-node/
 ├── package.json              # Configuração do monorepo
 ├── tsconfig.json             # Configuração base do TypeScript
 └── README.md
+```
 
 ## Pré-requisitos
 
@@ -84,16 +94,19 @@ npm install
 **3. Execute os serviços em terminais separados:**
 
 Terminal 1 — Product Service:
+
 ```bash
 npm run product
 ```
 
 Terminal 2 — Order Service:
+
 ```bash
 npm run order
 ```
 
 Terminal 3 — API Gateway:
+
 ```bash
 npm run gateway
 ```
@@ -135,21 +148,25 @@ Após subir os serviços (em qualquer das opções), use Postman, Insomnia, curl
 ### Exemplos de teste com curl (Windows PowerShell)
 
 **Health check do gateway:**
+
 ```powershell
 curl.exe http://localhost:3000/health
 ```
 
 **Listar produtos:**
+
 ```powershell
 curl.exe http://localhost:3000/products
 ```
 
 **Criar pedido:**
+
 ```powershell
 curl.exe -X POST http://localhost:3000/orders -H "Content-Type: application/json" -d "{\"productId\": 1, \"quantity\": 2}"
 ```
 
 **Resposta esperada:**
+
 ```json
 {
   "id": 1,
